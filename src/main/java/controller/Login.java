@@ -27,17 +27,18 @@ public class Login extends HttpServlet{
 				//verify the password
 				if(u.getUserpassword().equals(password)) {
 					//login success
+					req.setAttribute("user", u);
 					req.getRequestDispatcher("home.jsp").include(req, resp);
 				}else {
+					//password wrong
+					req.setAttribute("message", "password wrong");
 					req.getRequestDispatcher("login.jsp").include(req, resp);
 				}
 			}else {
 				// email is wrong
+				req.setAttribute("message", "wrong email");
 				req.getRequestDispatcher("login.jsp").include(req, resp);
 			}
-			
-			
-			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
