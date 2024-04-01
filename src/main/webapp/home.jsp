@@ -1,3 +1,5 @@
+<%@page import="java.util.Base64"%>
+<%@page import="dto.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,8 +9,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+			<!-- get user from session -->
+		<% User user = (User)request.getSession().getAttribute("user");%>
+		<% String username = user.getUsername(); %>
 		
-		<h1>Welcome User</h1>
+		<h2>Welcome <%= username %></h2>
+		<h4>Email: <%= user.getUseremail() %></h4>
+		
+		
+		
+		<% String image = new String(Base64.getEncoder().encode(user.getUserimage())); %>
+		<img alt="" src="data:image/jpeg;base64,<%= image %>" width="150" height="100">
+		
+		
 		
 		
 </body>
