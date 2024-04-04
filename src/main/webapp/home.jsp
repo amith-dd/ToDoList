@@ -8,8 +8,19 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    .table-container {
+        margin-left: 10%;
+        margin-right: 10%;
+         width: 80%; /* Adjust the width as needed */
+    }
+</style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+
+
+
 </head>
 <body>
 
@@ -29,37 +40,36 @@
 		<h3>Tasks</h3><br>
 		
 		<% List<Task> tasks = (List)request.getAttribute("tasks"); %>
-		
-		<table border="5px">
-		<tr border="5px">
-		<th>id</th>
+		<div class="table-container"></div>
+		<table class="table table-info" >
+		<tr class="table-info" >
+		<th>#</th>
 		<th>title</th>
 		<th>description</th>
 		<th>priority</th>
 		<th>due date</th>
 		<th>status</th>
+		<th>delete</th>
 		</tr>
 		
+		<% int num = 1; %>
 		<% for(Task task :tasks){ %>
 		
-		<tr border="5px">
-		<td><%= task.getTaskid() %></td>
-		<td><%= task.getTasktitle() %></td>
-		<td><%= task.getTaskdescription() %></td>
-		<td><%= task.getTaskpriority()%></td>
-		<td><%= task.getTaskduedate() %></td>
-		<td><%= task.getTaskstatus() %></td>
+		
+		<tr class="table-info">
+		<td class="table-info"><%= num %></td>
+		<td class="table-info"><%= task.getTasktitle() %></td>
+		<td class="table-info"><%= task.getTaskdescription() %></td>
+		<td class="table-info"><%= task.getTaskpriority()%></td>
+		<td class="table-info"><%= task.getTaskduedate() %></td>
+		<td class="table-info"><%= task.getTaskstatus() %></td>
+		<td class="table-info"><a href="delete?id=<%= task.getTaskid() %>">Delete</a></td>
 		</tr>
 		
+		<% num +=1; %>
 		<% } %>
 		
 		</table>
-		
-		
-		
-		
-		
-		
 		
 </body>
 </html>

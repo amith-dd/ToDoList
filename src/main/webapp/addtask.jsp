@@ -4,6 +4,8 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style>
@@ -25,10 +27,7 @@
             <div class="card form-card">
                 <div class="card-body">
                     <form action="addtask" method="post">
-                        <div class="mb-3">
-                            <label for="taskid" class="form-label small">Task ID</label>
-                            <input type="text" class="form-control form-control-sm" id="taskid" name="taskid" required>
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="tasktitle" class="form-label small">Task Title</label>
                             <input type="text" class="form-control form-control-sm" id="tasktitle" name="tasktitle" required>

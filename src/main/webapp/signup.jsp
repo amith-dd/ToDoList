@@ -48,10 +48,7 @@
             <div class="card form-card">
                 <div class="card-body">
                     <form action="saveuser" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="id" class="form-label small">ID</label>
-                            <input type="text" class="form-control form-control-sm" id="id" name="id">
-                        </div>
+                        
                         <div class="mb-3">
                             <label for="name" class="form-label small">Name</label>
                             <input type="text" class="form-control form-control-sm" id="name" name="name">
