@@ -2,13 +2,13 @@ package dto;
 
 public class Task {
 	
-	private int taskid;
-	private String tasktitle;
-	private String taskdescription;
-	private String taskpriority;
-	private String taskduedate;
-	private String taskstatus;
-	private int userid;
+	private int taskid;  //auto generated(fixed)
+	private String tasktitle;  // editable
+	private String taskdescription;  // editable
+	private String taskpriority;  // editable
+	private String taskduedate;  // editable
+	private String taskstatus;  // editable
+	private int userid;  // fixed
 	public int getTaskid() {
 		return taskid;
 	}
@@ -67,6 +67,12 @@ public class Task {
 		this.taskduedate = taskduedate;
 		this.taskstatus = taskstatus;
 		this.userid = userid;
+	}
+	@Override
+	public String toString() {
+		return "Task [taskid=" + taskid + ", tasktitle=" + tasktitle + ", taskdescription=" + taskdescription
+				+ ", taskpriority=" + taskpriority + ", taskduedate=" + taskduedate + ", taskstatus=" + taskstatus
+				+ ", userid=" + userid + "]";
 	}
 	
 	

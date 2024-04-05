@@ -131,5 +131,16 @@ public class Dao {
 			return 1;
 		}
 	}
+
+	public Task findtaskById(int taskid) throws ClassNotFoundException, SQLException {
+		Connection con = getConnection();
+		PreparedStatement pst = con.prepareStatement("SELECT * from task where taskid = ?");
+		pst.setInt(1, taskid);
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		Task task = new Task(taskid, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+		return task;
+		
+	}
 	
 }
