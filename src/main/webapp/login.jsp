@@ -38,5 +38,11 @@
             </div>
         </div>
     </div>
+    
+    <% String message = (String)request.getAttribute("message"); %>
+    <% if(message!=null){ %>
+    <h3><%= message %></h3>
+    <% } %>
+    
 </body>
 </html>

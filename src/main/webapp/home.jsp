@@ -50,6 +50,7 @@
 		<th>due date</th>
 		<th>status</th>
 		<th>delete</th>
+		<th>edit</th>
 		</tr>
 		
 		<% int num = 1; %>
@@ -64,12 +65,15 @@
 		<td class="table-info"><%= task.getTaskduedate() %></td>
 		<td class="table-info"><%= task.getTaskstatus() %></td>
 		<td class="table-info"><a href="delete?id=<%= task.getTaskid() %>">Delete</a></td>
+		<td class="table-info"><a href="edit?id=<%= task.getTaskid() %>">Edit</a></td>
 		</tr>
 		
 		<% num +=1; %>
 		<% } %>
 		
 		</table>
+		
+		<a href="logout">logout</a>
 		
 </body>
 </html>
