@@ -32,9 +32,7 @@ public class DeleteTask extends HttpServlet {
 				if (dbtask.getUserid() == u.getUserid()) {
 					dao.deleteTaskById(taskid);
 
-					req.setAttribute("tasks", dao.getalltasksByUserId(u.getUserid()));
-					RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
-					dispatcher.include(req, resp);
+					resp.sendRedirect("home.jsp");
 				}else {
 					resp.sendRedirect("logout");
 				}
