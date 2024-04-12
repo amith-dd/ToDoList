@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,10 +154,17 @@ public class Dao {
 		pst.setString(4,task.getTaskduedate());
 		pst.setString(5,task.getTaskstatus());
 		pst.setInt(6, task.getUserid());
-		pst.setInt(7, task.getTaskid());
 		
 		pst.executeUpdate();
 		
+	}
+	
+	public void updatePriorityBasedOnDuration() throws SQLException, ClassNotFoundException {
+		Connection con = getConnection();
+		Statement st = con.createStatement();
+		st.execute("UPDATE task SET taskpriority = 'high' WHERE taskduedate BETWEEN CURDATE() AND CURDATE() +  INTERVAL 3 DAY");
+		st.execute("UPDATE task SET taskpriority = 'medium' WHERE taskduedate BETWEEN CURDATE() + INTERVAL 4 DAY AND CURDATE() + INTERVAL 7 DAY");
+		st.execute("UPDATE task SET taskpriority = 'low' WHERE taskduedate > CURDATE() + INTERVAL 7 DAY");
 	}
 	
 }
