@@ -37,9 +37,6 @@ public class Login extends HttpServlet{
 					//create session and set the data
 					// get all the tasks related to user id from User
 					
-					List<Task> tasks = dao.getalltasksByUserId(u.getUserid());
-					req.setAttribute("tasks", tasks);
-					
 					HttpSession session = req.getSession();
 					session.setAttribute("user", u);
 					

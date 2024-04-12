@@ -46,10 +46,7 @@ public class UpdateTask extends HttpServlet {
 
 			dao.updateTask(task);
 
-			List<Task> tasks = dao.getalltasksByUserId(user.getUserid());
-			req.setAttribute("tasks", tasks);
-
-			req.getRequestDispatcher("home.jsp").include(req, resp);
+			resp.sendRedirect("home.jsp");
 
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

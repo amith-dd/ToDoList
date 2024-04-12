@@ -14,7 +14,6 @@ public class Schedular implements Runnable{
 			
 			try {
 				dao.updatePriorityBasedOnDuration();
-				System.out.println("=============from schedular class==============");
 				Thread.sleep(1000*30);
 				
 			} catch (ClassNotFoundException e) {
@@ -25,14 +24,8 @@ public class Schedular implements Runnable{
 				e.printStackTrace();
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
-			}
-			
-			
-				  
-		}	
-			
-		
-		
+			}		  
+		}		
 	}
 
 }

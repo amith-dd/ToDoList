@@ -1,3 +1,4 @@
+<%@page import="dao.Dao"%>
 <%@page import="dto.Task"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Base64"%>
@@ -9,71 +10,86 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
-    .table-container {
-        margin-left: 10%;
-        margin-right: 10%;
-         width: 80%; /* Adjust the width as needed */
+    .user-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .user-info img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+    .task-table {
+        width: 100%; /* Adjust as needed */
     }
 </style>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-
-
-
-
+<meta charset="UTF-8">
+<title>Task Management</title>
 </head>
 <body>
 
-	<%@ include file="template.jsp" %>
-			<!-- get user from session -->
-		<% User user = (User)request.getSession().getAttribute("user");%>
+  <%@ include file="template.jsp" %>
+  
+  <% User user = (User)request.getSession().getAttribute("user");%>
 		<% String username = user.getUsername(); %>
-		
-		<h2>Welcome <%= username %></h2>
-		<h4>Email: <%= user.getUseremail() %></h4>
-		
-		<% String image = new String(Base64.getEncoder().encode(user.getUserimage())); %>
-		<img alt="" src="data:image/jpeg;base64,<%= image %>" width="150" height="100">
-		
-		<a href="addtask.jsp">Add Task</a><br>
-		
-		<h3>Tasks</h3><br>
-		
-		<% List<Task> tasks = (List)request.getAttribute("tasks"); %>
-		<div class="table-container"></div>
-		<table class="table table-info" >
-		<tr class="table-info" >
-		<th>#</th>
-		<th>title</th>
-		<th>description</th>
-		<th>priority</th>
-		<th>due date</th>
-		<th>status</th>
-		<th>delete</th>
-		<th>edit</th>
-		</tr>
-		
-		<% int num = 1; %>
-		<% for(Task task :tasks){ %>
-		
-		
-		<tr class="table-info">
-		<td class="table-info"><%= num %></td>
-		<td class="table-info"><%= task.getTasktitle() %></td>
-		<td class="table-info"><%= task.getTaskdescription() %></td>
-		<td class="table-info"><%= task.getTaskpriority()%></td>
-		<td class="table-info"><%= task.getTaskduedate() %></td>
-		<td class="table-info"><%= task.getTaskstatus() %></td>
-		<td class="table-info"><a href="delete?id=<%= task.getTaskid() %>">Delete</a></td>
-		<td class="table-info"><a href="edit?id=<%= task.getTaskid() %>">Edit</a></td>
-		</tr>
-		
-		<% num +=1; %>
-		<% } %>
-		
-		</table>
-		
-		<a href="logout">logout</a>
-		
+
+  <div class="container">
+    <div class="row user-info">
+      <img alt="" src="data:image/jpeg;base64,<%= new String(Base64.getEncoder().encode(user.getUserimage())) %>" />
+      <div>
+        <h2>Welcome, <%= username %></h2>
+        <h4>Email: <%= user.getUseremail() %></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <a href="addtask.jsp" class="btn btn-primary">Add Task</a>
+      </div>
+      <div class="col-md-6 text-end">
+        <a href="logout" class="btn btn-danger">Logout</a>
+      </div>
+    </div>
+
+    <h3>Tasks</h3>
+    <br>
+
+    <% Dao dao = new Dao(); %>
+    <% List<Task> tasks = dao.getalltasksByUserId(user.getUserid()); %>
+
+    <table class="table task-table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% int num = 1; %>
+        <% for (Task task : tasks) { %>
+          <tr>
+            <th scope="row"><%= num %></th>
+            <td><%= task.getTasktitle() %></td>
+            <td><%= task.getTaskdescription() %></td>
+            <td><%= task.getTaskpriority() %></td>
+            <td><%= task.getTaskduedate() %></td>
+            <td><%= task.getTaskstatus() %></td>
+            <td><a href="delete?id=<%= task.getTaskid() %>" class="btn btn-sm btn-danger">Delete</a></td>
+            <td><a href="edit?id=<%= task.getTaskid() %>" class="btn btn-sm btn-primary">Edit</a></td>
+          </tr>
+          <% num += 1; %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
 </body>
 </html>
