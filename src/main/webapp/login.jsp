@@ -36,13 +36,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <% String message = (String)request.getAttribute("message"); %>
+             <% String message = (String)request.getAttribute("message"); %>
     <% if(message!=null){ %>
     <h3><%= message %></h3>
     <% } %>
+        </div>
+    </div>
+    
+   
     
 </body>
 </html>

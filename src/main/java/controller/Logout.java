@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,9 @@ public class Logout extends HttpServlet{
 		HttpSession session = req.getSession(false);
 		session.invalidate();
 		
-		req.getRequestDispatcher("login.jsp").include(req, resp);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
+		dispatcher.include(req, resp);
+		
 		
 	}
 	
