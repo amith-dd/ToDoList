@@ -49,8 +49,12 @@
         <a href="addtask.jsp" class="btn btn-primary">Add Task</a>
       </div>
       <div class="col-md-6 text-end">
+      
+      	 <a href="profile.jsp" class="btn btn-primary">Profile</a>
         <a href="logout" class="btn btn-danger">Logout</a>
+        
       </div>
+       
     </div>
 
     <h3>Tasks</h3>

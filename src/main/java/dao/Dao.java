@@ -51,7 +51,7 @@ public class Dao {
 			u.setUseremail(rs.getString(3));
 			u.setUsercontact(rs.getLong(4));
 			u.setUserpassword(rs.getString(5));
-			// connvert bllog image to byt[]
+			// convert blob image to byte[]
 			Blob imageBlob = rs.getBlob(6);
 			byte[] image = imageBlob.getBytes(1, (int)imageBlob.length());
 			
@@ -166,5 +166,15 @@ public class Dao {
 		st.execute("UPDATE task SET taskpriority = 'medium' WHERE taskduedate BETWEEN CURDATE() + INTERVAL 4 DAY AND CURDATE() + INTERVAL 7 DAY");
 		st.execute("UPDATE task SET taskpriority = 'low' WHERE taskduedate > CURDATE() + INTERVAL 7 DAY");
 	}
+	
+	public int updateUserPassword(User u) throws ClassNotFoundException, SQLException {
+		Connection con = getConnection();
+		PreparedStatement pst = con.prepareStatement("update user set userpassword = ? where userid = ?");
+		pst.setString(1, u.getUserpassword());
+		pst.setInt(2,u.getUserid());
+		
+		return pst.executeUpdate();
+	}
+	
 	
 }

@@ -48,7 +48,7 @@ public class Login extends HttpServlet{
 				}
 			}else {
 				// email is wrong
-				req.setAttribute("message", "wrong email");
+				req.setAttribute("message", "invalid email");
 				req.getRequestDispatcher("login.jsp").include(req, resp);
 			}
 			
