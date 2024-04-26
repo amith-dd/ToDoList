@@ -51,7 +51,7 @@ public class Dao {
 			u.setUseremail(rs.getString(3));
 			u.setUsercontact(rs.getLong(4));
 			u.setUserpassword(rs.getString(5));
-			// connvert bllog image to byt[]
+			// convert blob image to byte[]
 			Blob imageBlob = rs.getBlob(6);
 			byte[] image = imageBlob.getBytes(1, (int)imageBlob.length());
 			
