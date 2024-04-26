@@ -167,4 +167,14 @@ public class Dao {
 		st.execute("UPDATE task SET taskpriority = 'low' WHERE taskduedate > CURDATE() + INTERVAL 7 DAY");
 	}
 	
+	public int updateUserPassword(User u) throws ClassNotFoundException, SQLException {
+		Connection con = getConnection();
+		PreparedStatement pst = con.prepareStatement("update user set userpassword = ? where userid = ?");
+		pst.setString(1, u.getUserpassword());
+		pst.setInt(2,u.getUserid());
+		
+		return pst.executeUpdate();
+	}
+	
+	
 }

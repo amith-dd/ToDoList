@@ -25,18 +25,16 @@ import dto.User;
 
 @WebServlet("/forgotpassword")
 public class ForgotPassword extends HttpServlet{
-	
-	
-	
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 		Dao dao = new Dao();
 		
 		String email = req.getParameter("email");
 		
 		try {
+			
 			User u = dao.findByEmail(email);
 			if(u!=null) {
 				
@@ -55,21 +53,23 @@ public class ForgotPassword extends HttpServlet{
 		            }
 		        });
 		        
+		        String newPass = PasswordGenerator.generatePassword();
+		        u.setUserpassword(newPass);
+		        Dao dao2 = new Dao();
+		        dao2.updateUserPassword(u);
+		      
 		        MimeMessage message = new MimeMessage(session);
 		        message.setFrom(new InternetAddress("amithdd0@gmail.com")); // Replace with your email
 		        message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 		        message.setSubject("Your New Password");
-		        message.setText("Your new password is: " + u.getUserpassword());
+		        message.setText("Your new password is: " + newPass );
 		        
 		        Transport.send(message);
 				
 		        resp.sendRedirect("login.jsp");
 				
 			}
-			
-			
-			
-			
+		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +85,7 @@ public class ForgotPassword extends HttpServlet{
 			RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
 			dispatcher.include(req, resp);
 		}
-		
-		
+				
 	}
-	
-	
-	
 	
 }
